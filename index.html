@@ -18,6 +18,16 @@
       --primary-dark: #215b16;
       --primary-deep: #18440f;
       --primary-light: #77b761;
+      --use-accent: #1d4ed8;
+      --use-accent-dark: #123f7f;
+      --use-soft: #eef6ff;
+      --use-soft-2: #dcecff;
+      --use-line: #9fc5ff;
+      --reward-accent: #b45309;
+      --reward-accent-dark: #8a3c05;
+      --reward-soft: #fff7e8;
+      --reward-soft-2: #ffedd0;
+      --reward-line: #f5bd63;
       --value: #0b1a09;
       --warn: #fff7ed;
       --warn-line: #fed7aa;
@@ -198,10 +208,22 @@
     }
 
     .conversion-row {
-      padding: 13px;
+      padding: 14px;
       border: 1px solid rgba(47, 122, 31, 0.17);
       border-radius: 18px;
       background: #fbfdf9;
+    }
+
+    .conversion-row.use-conversion {
+      border-color: var(--use-line);
+      background: linear-gradient(135deg, #f8fbff 0%, var(--use-soft) 100%);
+      box-shadow: inset 0 0 0 1px rgba(29, 78, 216, 0.04);
+    }
+
+    .conversion-row.reward-conversion {
+      border-color: var(--reward-line);
+      background: linear-gradient(135deg, #fffdf7 0%, var(--reward-soft) 100%);
+      box-shadow: inset 0 0 0 1px rgba(180, 83, 9, 0.04);
     }
 
     .conversion-title {
@@ -209,18 +231,62 @@
       align-items: center;
       justify-content: space-between;
       gap: 8px;
-      margin-bottom: 10px;
+      margin-bottom: 11px;
       color: #1d3218;
-      font-size: 13px;
-      font-weight: 950;
+      font-size: 15px;
+      font-weight: 1000;
       line-height: 1.35;
+      letter-spacing: -0.04em;
+    }
+
+    .conversion-title > span:first-child {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      word-break: keep-all;
+    }
+
+    .conversion-row.use-conversion .conversion-title > span:first-child::before,
+    .conversion-row.reward-conversion .conversion-title > span:first-child::before {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 38px;
+      height: 24px;
+      padding: 0 8px;
+      border-radius: 999px;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 1000;
       letter-spacing: -0.03em;
+      flex: 0 0 auto;
+    }
+
+    .conversion-row.use-conversion .conversion-title > span:first-child::before {
+      content: "사용";
+      background: var(--use-accent);
+    }
+
+    .conversion-row.reward-conversion .conversion-title > span:first-child::before {
+      content: "적립";
+      background: var(--reward-accent);
+    }
+
+    .conversion-row.use-conversion .conversion-title {
+      color: var(--use-accent-dark);
+    }
+
+    .conversion-row.reward-conversion .conversion-title {
+      color: var(--reward-accent-dark);
     }
 
     .conversion-note {
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.72);
       color: var(--muted);
       font-size: 11px;
-      font-weight: 800;
+      font-weight: 900;
       white-space: nowrap;
     }
 
@@ -235,7 +301,7 @@
       min-width: 0;
       border: 1px solid rgba(215, 227, 210, 0.9);
       border-radius: 16px;
-      background: #f7faf6;
+      background: #ffffff;
       padding: 12px 10px 11px;
     }
 
@@ -251,8 +317,38 @@
       content: "";
       position: absolute;
       inset: 0 auto 0 0;
-      width: 4px;
+      width: 5px;
       background: var(--primary);
+    }
+
+    .conversion-row.use-conversion .convert-box {
+      border-color: rgba(29, 78, 216, 0.18);
+      background: rgba(255, 255, 255, 0.82);
+    }
+
+    .conversion-row.reward-conversion .convert-box {
+      border-color: rgba(180, 83, 9, 0.18);
+      background: rgba(255, 255, 255, 0.82);
+    }
+
+    .conversion-row.use-conversion .convert-box.converted {
+      border-color: var(--use-line);
+      background: linear-gradient(135deg, #ffffff 0%, var(--use-soft-2) 100%);
+      box-shadow: 0 8px 20px rgba(29, 78, 216, 0.10);
+    }
+
+    .conversion-row.reward-conversion .convert-box.converted {
+      border-color: var(--reward-line);
+      background: linear-gradient(135deg, #ffffff 0%, var(--reward-soft-2) 100%);
+      box-shadow: 0 8px 20px rgba(180, 83, 9, 0.10);
+    }
+
+    .conversion-row.use-conversion .convert-box.converted::before {
+      background: var(--use-accent);
+    }
+
+    .conversion-row.reward-conversion .convert-box.converted::before {
+      background: var(--reward-accent);
     }
 
     .box-label {
@@ -270,6 +366,14 @@
       padding-left: 2px;
     }
 
+    .conversion-row.use-conversion .converted .box-label {
+      color: var(--use-accent-dark);
+    }
+
+    .conversion-row.reward-conversion .converted .box-label {
+      color: var(--reward-accent-dark);
+    }
+
     .box-value {
       display: block;
       margin-top: 7px;
@@ -285,6 +389,16 @@
     .converted .box-value {
       color: var(--primary-dark);
       font-size: clamp(19px, 4.7vw, 25px);
+    }
+
+    .conversion-row.use-conversion .converted .box-value {
+      color: var(--use-accent-dark);
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+    }
+
+    .conversion-row.reward-conversion .converted .box-value {
+      color: var(--reward-accent-dark);
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
     }
 
     .box-sub {
@@ -336,20 +450,50 @@
       box-shadow: inset 0 0 0 1px rgba(47, 122, 31, 0.08);
     }
 
+    .conversion-row.use-conversion .direction-label,
+    .conversion-row.use-conversion .arrow {
+      color: var(--use-accent-dark);
+    }
+
+    .conversion-row.use-conversion .arrow {
+      background: var(--use-soft-2);
+      box-shadow: inset 0 0 0 1px rgba(29, 78, 216, 0.12);
+    }
+
+    .conversion-row.reward-conversion .direction-label,
+    .conversion-row.reward-conversion .arrow {
+      color: var(--reward-accent-dark);
+    }
+
+    .conversion-row.reward-conversion .arrow {
+      background: var(--reward-soft-2);
+      box-shadow: inset 0 0 0 1px rgba(180, 83, 9, 0.12);
+    }
+
     .badge {
       display: inline-flex;
       align-items: center;
       max-width: 100%;
       margin: 0 0 8px 2px;
-      padding: 4px 8px;
+      padding: 5px 9px;
       border-radius: 999px;
       background: #dff0d8;
       color: var(--primary-dark);
-      font-size: 10.5px;
-      font-weight: 950;
+      font-size: 11px;
+      font-weight: 1000;
       line-height: 1.15;
       letter-spacing: -0.02em;
       white-space: normal;
+    }
+
+    .conversion-row.use-conversion .badge {
+      background: var(--use-soft-2);
+      color: var(--use-accent-dark);
+    }
+
+    .conversion-row.reward-conversion .badge {
+      background: var(--reward-soft-2);
+      color: var(--reward-accent-dark);
     }
 
     .result-row {
@@ -574,7 +718,7 @@
       </div>
 
       <div class="results" aria-live="polite">
-        <div class="conversion-row">
+        <div class="conversion-row use-conversion">
           <div class="conversion-title">
             <span>사용 포인트 환산</span>
             <span class="conversion-note">입력 포인트 기준</span>
@@ -597,7 +741,7 @@
           </div>
         </div>
 
-        <div class="conversion-row">
+        <div class="conversion-row reward-conversion">
           <div class="conversion-title">
             <span>구매확정 적립 포인트 환산</span>
             <span class="conversion-note">결제금액 기준</span>
